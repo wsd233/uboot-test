@@ -118,10 +118,10 @@ jobs:
           sha="${GITHUB_SHA:0:8}"
           tag="build-$(date +'%Y%m%d-%H%M' -d "$time")"
           message="Auto-Build $(date +'%Y-%m-%d %H:%M' -d "$time")"
-          gh release create "$tag" "$GITHUB_SHA" -m "$message" \
+          gh release create "$tag" "$GITHUB_SHA" --notes "$message" \
             $(for a in build/*.bin; do echo -a "$a"; done) \
-            -a build/resource.img \
-            -a build/eMMC.burn.img
+              -a build/resource.img \
+              -a build/eMMC.burn.img
 
         env:
           GITHUB_TOKEN: ${{ github.token }}
