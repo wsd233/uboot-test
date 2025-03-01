@@ -5,10 +5,10 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Install dependencies
         run: |
@@ -39,9 +39,9 @@ jobs:
           mkdir -p resource
 
           convert \
-            -size 640x360 \
-            -background black \
-            -gravity center -font "DejaVu-Sans" -pointsize 64 -fill white label:"U-Boot" \
+            -size 640x320 \
+            -background white \
+            -gravity center -font "DejaVu-Sans" -pointsize 64 -fill black label:"U-Boot" \
             BMP3:resource/bootup.bmp
 
           cat <<EOF >resource/list.txt
@@ -105,7 +105,7 @@ jobs:
           ./AmlImg pack build/eMMC.burn.img pack/
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           path: |
             build/*.bin
